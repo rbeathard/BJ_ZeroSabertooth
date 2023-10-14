@@ -3,8 +3,8 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var exec = require('child_process').exec, child;
 var port = process.env.PORT || 3000;
-var ads1x15 = require('node-ads1x15');
-var adc = new ads1x15(1); // set to 0 for ads1015
+//var ads1x15 = require('node-ads1x15');
+//var adc = new ads1x15(1); // set to 0 for ads1015
 
 var Gpio = require('pigpio').Gpio,
   A1 = new Gpio(27, {mode: Gpio.OUTPUT}),
@@ -89,16 +89,16 @@ io.on('connection', function(socket){
          console.log('temp', temp);
       }
     });
-    if(!adc.busy){
-      adc.readADCSingleEnded(0, '4096', '250', function(err, data){ //channel, gain, samples
-        if(!err){          
-          voltage = 2*parseFloat(data)/1000;
-          console.log("ADC: ", voltage);
-          io.emit('volt', voltage);
-        }
-      });
-    }
-  }, 5000);
+    //if(!adc.busy){
+      //adc.readADCSingleEnded(0, '4096', '250', function(err, data){ //channel, gain, samples
+        //if(!err){          
+          //voltage = 2*parseFloat(data)/1000;
+          //console.log("ADC: ", voltage);
+          //io.emit('volt', voltage);
+        /}
+      //});
+    //}
+  //}, 5000);
 
 });
 
